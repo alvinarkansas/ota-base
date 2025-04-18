@@ -23,7 +23,7 @@ export const searchAnime = async ({
     params: {
       q: query,
       page: pageParam,
-      limit: 12,
+      limit: 15,
     },
   });
   return response.data;

@@ -38,32 +38,21 @@ export const AnimeList: React.FC = () => {
           </div>
         ) : (
           <>
-            <div className="grid grid-cols-3 gap-2 mb-8">
+            <div className="grid grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-4 mb-8">
               {animeList.map((anime) => {
                 return (
-                  <div key={anime.mal_id} className="flex flex-col">
-                    <Link
-                      to={`anime/${anime.mal_id}`}
-                      state={{ detail: anime }}
-                      key={anime.mal_id}
-                      className="flex flex-col"
-                    >
-                      <img
-                        src={anime.images.jpg.large_image_url}
-                        alt={anime.title}
-                        className="object-cover rounded-lg h-40 w-full"
-                      />
-                    </Link>
-                    <div className="p-2 hidden">
-                      <h2 className="text-lg font-bold mb-2">{anime.title}</h2>
-                      <p className="text-sm text-gray-500">
-                        {anime.title_english}
-                      </p>
-                      <p className="text-sm text-gray-500">
-                        {anime.title_japanese}
-                      </p>
-                    </div>
-                  </div>
+                  <Link
+                    to={`anime/${anime.mal_id}`}
+                    state={{ detail: anime }}
+                    key={anime.mal_id}
+                    className="flex flex-col lg:transition lg:hover:scale-95"
+                  >
+                    <img
+                      src={anime.images.jpg.large_image_url}
+                      alt={anime.title}
+                      className="object-cover rounded-lg h-40 sm:h-[360px] w-full"
+                    />
+                  </Link>
                 );
               })}
             </div>

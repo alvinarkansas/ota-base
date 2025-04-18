@@ -29,34 +29,34 @@ export const AnimeDetail = () => {
   }
 
   return (
-    <div className="container mx-auto md:px-4 relative">
+    <div className="container mx-auto md:py-8 relative">
       <div className="md:flex">
-        <div className="relative md:w-1/3">
+        <div className="relative md:w-1/3 md:flex md:flex-col-reverse md:gap-4">
           <img
             src={anime.images.jpg.large_image_url}
             alt={anime.title}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover md:rounded-lg"
           />
           <div className="bg-gradient-to-t from-ntrl-500 h-1/3 w-full absolute inset-x-0 bottom-0 -mb-1 md:hidden" />
 
           <Link
             to="/"
-            className="inline-flex items-center text-ntrl-100 hover:text-ntrl-100 mb-6 absolute top-4 left-4"
+            className="inline-flex items-center text-ntrl-100 hover:text-ntrl-100 absolute top-4 left-4 md:relative md:mb-6"
           >
             <ArrowLeft size={20} className="mr-2" />
             Back
           </Link>
         </div>
 
-        <div className="p-6 md:w-2/3">
-          <div className="flex items-center gap-1 rounded-full">
+        <div className="p-6 md:w-2/3 md:pt-16">
+          <div className="flex items-center gap-1 rounded-full md:mb-2">
             <Star color="#FEE81E" size={16} strokeWidth={3} />
             <span className="text-sm font-semibold text-[#FEE81E]">
-              {anime.score}
+              {anime.score ?? "N/A"}
             </span>
           </div>
 
-          <h1 className="text-xl font-bold mb-4">{anime.title}</h1>
+          <h1 className="text-xl font-bold mb-4 lg:text-3xl">{anime.title}</h1>
 
           <div className="flex flex-wrap gap-2 mb-2">
             {anime.genres.map((genre) => (
@@ -69,11 +69,18 @@ export const AnimeDetail = () => {
             ))}
           </div>
 
-          <p className="text-xs mb-4">
-            {anime.episodes} Episodes | {anime.status}
-          </p>
+          <div className="flex items-start gap-1">
+            {anime.episodes ? (
+              <>
+                <span className="text-xs mb-4">{anime.episodes} Episodes</span>
+                <span className="text-xs">|</span>
+              </>
+            ) : null}
 
-          <p className="leading-relaxed text-ntrl-300 text-xs">
+            <span className="text-xs mb-4"> {anime.status}</span>
+          </div>
+
+          <p className="leading-relaxed text-ntrl-300 text-xs lg:text-sm lg:leading-loose">
             {anime.synopsis}
           </p>
         </div>
