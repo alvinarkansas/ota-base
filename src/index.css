@@ -6,5 +6,5 @@
 
 body {
   font-family: "Plus Jakarta Sans", Verdana, sans-serif;
-  @apply bg-neutral-500 text-neutral-100;
+  @apply bg-ntrl-500 text-ntrl-100;
 }

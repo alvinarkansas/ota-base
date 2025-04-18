@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ListPage } from "./pages/ListPage";
+import { AnimeList } from "./pages/AnimeList";
+import { AnimeDetail } from "./pages/AnimeDetail";
 
 const queryClient = new QueryClient();
 
@@ -9,7 +10,8 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<ListPage />} />
+          <Route path="/" element={<AnimeList />} />
+          <Route path="/anime/:id" element={<AnimeDetail />} />
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>

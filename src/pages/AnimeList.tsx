@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { searchAnime } from "../services/api";
 import { Button } from "../components/Button";
+import { Link } from "react-router-dom";
 
-export const ListPage: React.FC = () => {
+export const AnimeList: React.FC = () => {
   const [search, setSearch] = useState("");
   const { data, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage } =
     useInfiniteQuery({
@@ -25,7 +26,7 @@ export const ListPage: React.FC = () => {
           <h1 className="text-3xl font-bold mb-6">Otabase</h1>
           <input
             placeholder="Search anime..."
-            className="w-full px-6 py-4 rounded-full bg-neutral-400 placeholder:text-neutral-300"
+            className="w-full px-6 py-4 rounded-full bg-ntrl-400 placeholder:text-ntrl-300"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
@@ -41,11 +42,18 @@ export const ListPage: React.FC = () => {
               {animeList.map((anime) => {
                 return (
                   <div key={anime.mal_id} className="flex flex-col">
-                    <img
-                      src={anime.images.jpg.large_image_url}
-                      alt={anime.title}
-                      className="object-cover rounded-lg h-40 w-full"
-                    />
+                    <Link
+                      to={`anime/${anime.mal_id}`}
+                      state={{ detail: anime }}
+                      key={anime.mal_id}
+                      className="flex flex-col"
+                    >
+                      <img
+                        src={anime.images.jpg.large_image_url}
+                        alt={anime.title}
+                        className="object-cover rounded-lg h-40 w-full"
+                      />
+                    </Link>
                     <div className="p-2 hidden">
                       <h2 className="text-lg font-bold mb-2">{anime.title}</h2>
                       <p className="text-sm text-gray-500">

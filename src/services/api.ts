@@ -28,3 +28,8 @@ export const searchAnime = async ({
   });
   return response.data;
 };
+
+export const getAnimeById = async (id: number) => {
+  const response = await api.get(`/anime/${id}`);
+  return response.data;
+};
