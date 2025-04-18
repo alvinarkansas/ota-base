@@ -11,6 +11,15 @@ export default {
         500: "#1C1C27",
       },
     },
+    extend: {
+      colors: {
+        primary: {
+          100: "#F29406",
+          200: "#F27706",
+          300: "#DB6900",
+        },
+      },
+    },
   },
   plugins: [],
 };
