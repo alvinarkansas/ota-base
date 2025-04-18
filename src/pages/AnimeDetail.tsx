@@ -1,11 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { ArrowLeft, Star } from "lucide-react";
 import { getAnimeById } from "../services/api";
 import { Anime, AnimeResponse } from "../types/anime";
 
 export const AnimeDetail = () => {
   const { state } = useLocation();
+  const navigate = useNavigate();
 
   const { id } = useParams<{ id: string }>();
   const { data: animeResponse, isLoading } = useQuery<AnimeResponse>({
@@ -39,13 +40,15 @@ export const AnimeDetail = () => {
           />
           <div className="bg-gradient-to-t from-ntrl-500 h-1/3 w-full absolute inset-x-0 bottom-0 -mb-1 md:hidden" />
 
-          <Link
-            to="/"
+          <button
+            onClick={() => {
+              navigate(-1);
+            }}
             className="inline-flex items-center text-ntrl-100 hover:text-ntrl-100 absolute top-4 left-4 md:relative md:mb-6"
           >
             <ArrowLeft size={20} className="mr-2" />
             Back
-          </Link>
+          </button>
         </div>
 
         <div className="p-6 md:w-2/3 md:pt-16">

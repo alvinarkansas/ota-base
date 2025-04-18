@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { searchAnime } from "../services/api";
 import { Button } from "../components/Button";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 export const AnimeList: React.FC = () => {
-  const [search, setSearch] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchQuery = searchParams.get("q") || "";
+
   const { data, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage } =
     useInfiniteQuery({
-      queryKey: ["animes", search],
+      queryKey: ["animes", searchQuery],
       queryFn: searchAnime,
       getNextPageParam: (lastPage) =>
         lastPage.pagination.has_next_page
@@ -17,18 +19,22 @@ export const AnimeList: React.FC = () => {
       initialPageParam: 1,
     });
 
+  const handleSearch = (newSearch: string) => {
+    setSearchParams(newSearch ? { q: newSearch } : {});
+  };
+
   const animeList = data?.pages.flatMap((page) => page.data) ?? [];
 
   return (
     <div className="min-h-screen py-8">
       <div className="container mx-auto px-4">
-        <div className="mb-4">
+        <div className="mb-4 lg:flex lg:justify-between">
           <h1 className="text-3xl font-bold mb-6">Otabase</h1>
           <input
             placeholder="Search anime..."
-            className="w-full px-6 py-4 rounded-full bg-ntrl-400 placeholder:text-ntrl-300"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            className="w-full px-6 py-4 rounded-full bg-ntrl-400 placeholder:text-ntrl-300 lg:w-64"
+            value={searchQuery}
+            onChange={(e) => handleSearch(e.target.value)}
           />
         </div>
 

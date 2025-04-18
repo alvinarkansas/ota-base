@@ -24,6 +24,7 @@ export const searchAnime = async ({
       q: query,
       page: pageParam,
       limit: 15,
+      sfw: true,
     },
   });
   return response.data;
