@@ -4,6 +4,7 @@ import { searchAnime } from "../services/api";
 import { Button } from "../components/Button";
 import { Link, useSearchParams } from "react-router-dom";
 import { SearchBar } from "../components/SearchBar";
+import { AnimeCard } from "../components/AnimeCard";
 
 export const AnimeList: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -42,20 +43,7 @@ export const AnimeList: React.FC = () => {
           <>
             <div className="grid grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-4 mb-8">
               {animeList.map((anime) => {
-                return (
-                  <Link
-                    to={`anime/${anime.mal_id}`}
-                    state={{ detail: anime }}
-                    key={anime.mal_id}
-                    className="flex flex-col lg:transition lg:hover:scale-95"
-                  >
-                    <img
-                      src={anime.images.jpg.large_image_url}
-                      alt={anime.title}
-                      className="object-cover rounded-lg h-40 sm:h-[360px] w-full"
-                    />
-                  </Link>
-                );
+                return <AnimeCard key={anime.mal_id} anime={anime} />;
               })}
             </div>
 
