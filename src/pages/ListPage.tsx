@@ -1,14 +1,22 @@
 import React, { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { searchAnime } from "../services/api";
+import { Button } from "../components/Button";
 
 export const ListPage: React.FC = () => {
   const [search, setSearch] = useState("");
-  const [page, setPage] = useState(1);
-  const { data, isLoading } = useQuery({
-    queryKey: ["animes", search, page],
-    queryFn: () => searchAnime(search, page),
-  });
+  const { data, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage } =
+    useInfiniteQuery({
+      queryKey: ["animes", search],
+      queryFn: searchAnime,
+      getNextPageParam: (lastPage) =>
+        lastPage.pagination.has_next_page
+          ? lastPage.pagination.current_page + 1
+          : undefined,
+      initialPageParam: 1,
+    });
+
+  const animeList = data?.pages.flatMap((page) => page.data) ?? [];
 
   return (
     <div className="min-h-screen py-8">
@@ -30,7 +38,7 @@ export const ListPage: React.FC = () => {
         ) : (
           <>
             <div className="grid grid-cols-3 gap-2 mb-8">
-              {data?.data.map((anime) => {
+              {animeList.map((anime) => {
                 return (
                   <div key={anime.mal_id} className="flex flex-col">
                     <img
@@ -51,6 +59,23 @@ export const ListPage: React.FC = () => {
                 );
               })}
             </div>
+
+            {hasNextPage && (
+              <div className="flex justify-center mb-8">
+                <Button
+                  onClick={() => fetchNextPage()}
+                  disabled={isFetchingNextPage}
+                >
+                  {isFetchingNextPage ? "Loading..." : "Load More"}
+                </Button>
+              </div>
+            )}
+
+            {!hasNextPage && animeList.length > 0 && (
+              <div className="text-center text-gray-600">
+                No more results to load
+              </div>
+            )}
           </>
         )}
       </div>

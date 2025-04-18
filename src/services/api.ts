@@ -8,14 +8,21 @@ const api = axios.create({
   },
 });
 
-export const searchAnime = async (
-  query: string = "",
-  page: number = 1
-): Promise<AnimeResponse> => {
+type SearchAnimeParams = {
+  pageParam: number;
+  queryKey: string[];
+};
+
+export const searchAnime = async ({
+  pageParam = 1,
+  queryKey,
+}: SearchAnimeParams): Promise<AnimeResponse> => {
+  const [_, query] = queryKey;
+  console.log();
   const response = await api.get("/anime", {
     params: {
       q: query,
-      page,
+      page: pageParam,
       limit: 12,
     },
   });
