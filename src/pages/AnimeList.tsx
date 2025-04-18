@@ -31,7 +31,7 @@ export const AnimeList: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="mb-4 lg:flex lg:justify-between">
           <h1 className="text-3xl font-bold mb-6">Otabase</h1>
-          <SearchBar onSearch={handleSearch} />
+          <SearchBar onSearch={handleSearch} defaultValue={searchQuery} />
         </div>
 
         {isLoading ? (

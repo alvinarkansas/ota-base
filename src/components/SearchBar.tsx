@@ -13,12 +13,13 @@ import { useNavigate } from "react-router-dom";
 
 type Props = {
   onSearch: (query: string) => void;
+  defaultValue?: string;
 };
 
-export const SearchBar = ({ onSearch }: Props) => {
+export const SearchBar = ({ onSearch, defaultValue }: Props) => {
   const navigate = useNavigate();
 
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState(defaultValue ?? "");
   const [debouncedQuery] = useDebounce(query, 600);
   const { data, isLoading } = useQuery({
     queryKey: ["recommendation", debouncedQuery],
