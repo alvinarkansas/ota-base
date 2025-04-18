@@ -30,6 +30,18 @@ export const searchAnime = async ({
   return response.data;
 };
 
+export const getRecommendation = async (q: string): Promise<AnimeResponse> => {
+  const response = await api.get("/anime", {
+    params: {
+      q,
+      page: 1,
+      limit: 5,
+      sfw: true,
+    },
+  });
+  return response.data;
+};
+
 export const getAnimeById = async (id: number) => {
   const response = await api.get(`/anime/${id}`);
   return response.data;

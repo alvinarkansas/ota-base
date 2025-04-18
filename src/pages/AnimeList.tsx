@@ -3,6 +3,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { searchAnime } from "../services/api";
 import { Button } from "../components/Button";
 import { Link, useSearchParams } from "react-router-dom";
+import { SearchBar } from "../components/SearchBar";
 
 export const AnimeList: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -30,12 +31,7 @@ export const AnimeList: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="mb-4 lg:flex lg:justify-between">
           <h1 className="text-3xl font-bold mb-6">Otabase</h1>
-          <input
-            placeholder="Search anime..."
-            className="w-full px-6 py-4 rounded-full bg-ntrl-400 placeholder:text-ntrl-300 lg:w-64"
-            value={searchQuery}
-            onChange={(e) => handleSearch(e.target.value)}
-          />
+          <SearchBar onSearch={handleSearch} />
         </div>
 
         {isLoading ? (
