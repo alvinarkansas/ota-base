@@ -12,6 +12,10 @@ export type AnimeResponse = {
   data: Anime[];
 };
 
+export type AnimeDetailResponse = {
+  data: Anime;
+};
+
 export type Anime = {
   mal_id: number;
   url: string;

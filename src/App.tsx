@@ -2,12 +2,12 @@ import { lazy, ReactNode, Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Loading } from "./components/Loading";
-import NotFound from "./pages/NotFound";
+import NotFound from "./pages/not-found";
 
 const queryClient = new QueryClient();
 
-const AnimeList = lazy(() => import("./pages/AnimeList"));
-const AnimeDetail = lazy(() => import("./pages/AnimeDetail"));
+const AnimeList = lazy(() => import("./pages/anime-list"));
+const AnimeDetail = lazy(() => import("./pages/anime-detail"));
 
 function App() {
   return (

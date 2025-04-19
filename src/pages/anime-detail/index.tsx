@@ -7,8 +7,8 @@ import { AnimeStatus } from "@/components/AnimeStatus";
 import { Loading } from "@/components/Loading";
 import { Empty } from "@/components/Empty";
 import apologize from "@/assets/apologize.png";
-import { useGetAnimeDetail } from "../hooks/useGetAnimeDetail";
-import type { Anime } from "../types/anime";
+import { useGetAnimeDetail } from "../../hooks/useGetAnimeDetail";
+import type { Anime } from "../../types/anime";
 
 const dataTestIdPrefix = "anime_detail_page-";
 

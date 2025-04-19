@@ -1,10 +1,10 @@
-import { Button } from "../components/Button";
+import { Button } from "../../components/Button";
 import { useSearchParams } from "react-router-dom";
-import { SearchBar } from "../components/SearchBar";
-import { AnimeCard } from "../components/AnimeCard";
-import { useInfiniteAnimes } from "../hooks/useGetInfiniteAnimes";
-import { Loading } from "../components/Loading";
-import { AnimeListPlaceholder } from "../components/AnimeListPlaceholder";
+import { SearchBar } from "../../components/SearchBar";
+import { AnimeCard } from "../../components/AnimeCard";
+import { useInfiniteAnimes } from "../../hooks/useGetInfiniteAnimes";
+import { Loading } from "../../components/Loading";
+import { AnimeListPlaceholder } from "../../components/AnimeListPlaceholder";
 
 const dataTestIdPrefix = "anime_list_page-";
 

@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { AnimeResponse } from "../types/anime";
+import { AnimeDetailResponse } from "../types/anime";
 import { getAnimeById } from "../services/api";
 
 type Param = {
@@ -8,7 +8,7 @@ type Param = {
 };
 
 export const useGetAnimeDetail = ({ id, enabled }: Param) => {
-  const { data, isLoading } = useQuery<AnimeResponse>({
+  const { data, isLoading } = useQuery<AnimeDetailResponse>({
     queryKey: ["anime", id],
     queryFn: () => getAnimeById(Number(id)),
     enabled,
