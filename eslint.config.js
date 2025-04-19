@@ -23,14 +23,14 @@ export default tseslint.config(
         "warn",
         { allowConstantExport: true },
       ],
-      // Disable unused vars rule from base ESLint and TypeScript
       "@typescript-eslint/no-unused-vars": [
-        "warn", // or "error"
+        "warn",
         {
           varsIgnorePattern: "^_", // Ignore variables starting with '_'
           argsIgnorePattern: "^_", // Ignore function arguments starting with '_'
         },
       ],
+      "no-console": "error",
     },
   }
 );
