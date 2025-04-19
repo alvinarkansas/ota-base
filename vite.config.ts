@@ -17,5 +17,9 @@ export default defineConfig({
       ["**/?(*.)+(spec|test).[jt]s", "node"],
     ],
     testTimeout: 5000,
+    coverage: {
+      provider: "v8",
+      reporter: ["clover", "json", "lcov", "text", "json-summary"],
+    },
   },
 }) satisfies UserConfig;

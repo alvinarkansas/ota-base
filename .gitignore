@@ -7,9 +7,17 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Testing
+/coverage
+
+# Dependencies
 node_modules
+
+# Production
 dist
 dist-ssr
+
+# Misc
 *.local
 .env
 
