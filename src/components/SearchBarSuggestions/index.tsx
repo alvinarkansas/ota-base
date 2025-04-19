@@ -9,6 +9,7 @@ type Props = {
   onContinueSearch: (query: string) => void;
   debouncedQuery: string;
   suggestions: Anime[];
+  "data-testid-prefix"?: string;
 };
 
 export const SearchBarSuggestions = ({
@@ -16,6 +17,7 @@ export const SearchBarSuggestions = ({
   debouncedQuery,
   onContinueSearch,
   suggestions,
+  "data-testid-prefix": dataTestIdPrefix = "",
 }: Props) => {
   const navigate = useNavigate();
 
@@ -34,8 +36,10 @@ export const SearchBarSuggestions = ({
             onClick={() => {
               onContinueSearch(debouncedQuery);
             }}
+            label-data-testid={`${dataTestIdPrefix}txt_query_label`}
+            icon-data-testid={`${dataTestIdPrefix}img_query_icon`}
           />
-          {suggestions.map((suggestion) => (
+          {suggestions.map((suggestion, index) => (
             <SearchBarSuggestion
               key={suggestion.mal_id}
               value={suggestion}
@@ -44,11 +48,17 @@ export const SearchBarSuggestions = ({
               onClick={() => {
                 navigate(`/anime/${suggestion?.mal_id}`);
               }}
+              label-data-testid={`${dataTestIdPrefix}txt_label-${index + 1}`}
+              icon-data-testid={`${dataTestIdPrefix}img_icon-${index + 1}`}
             />
           ))}
         </>
       ) : (
-        <SearchBarSuggestion value={null} label="Loading..." />
+        <SearchBarSuggestion
+          value={null}
+          label="Loading..."
+          label-data-testid={`${dataTestIdPrefix}txt_label`}
+        />
       )}
     </ComboboxOptions>
   );

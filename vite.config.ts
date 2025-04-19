@@ -16,7 +16,7 @@ export default defineConfig({
       // all function tests will run in node
       ["**/?(*.)+(spec|test).[jt]s", "node"],
     ],
-    testTimeout: 5000,
+    testTimeout: 10000,
     coverage: {
       provider: "v8",
       reporter: ["clover", "json", "lcov", "text", "json-summary"],

@@ -7,6 +7,7 @@ type Props = {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   onClear: () => void;
   onEnter?: (query: string) => void;
+  "data-testid-prefix"?: string;
 };
 
 export const SearchBarInput = ({
@@ -14,6 +15,7 @@ export const SearchBarInput = ({
   onChange,
   onClear,
   onEnter,
+  "data-testid-prefix": dataTestIdPrefix = "",
 }: Props) => {
   return (
     <div className="relative">
@@ -27,11 +29,13 @@ export const SearchBarInput = ({
             onEnter?.(query);
           }
         }}
+        data-testid={`${dataTestIdPrefix}txtfld_search`}
       />
       {query && (
         <button
           className="absolute inset-y-1 right-1 bg-ntrl-500 w-12 h-12 grid place-items-center rounded-full"
           onClick={onClear}
+          data-testid={`${dataTestIdPrefix}btn_clear`}
         >
           <X />
         </button>

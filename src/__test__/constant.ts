@@ -2,72 +2,54 @@ import { Anime } from "../types/anime";
 
 export const MOCK_ANIME: Anime = {
   mal_id: 999,
-  url: "https://myanimelist.net/anime/11061/Hunter_x_Hunter_2011",
+  url: "https://example.com/999",
   images: {
     jpg: {
-      image_url: "https://cdn.myanimelist.net/images/anime/1337/99013.jpg",
-      small_image_url:
-        "https://cdn.myanimelist.net/images/anime/1337/99013t.jpg",
-      large_image_url:
-        "https://cdn.myanimelist.net/images/anime/1337/99013l.jpg",
+      image_url: "https://example.com/images.jpg",
+      small_image_url: "https://example.com/images.jpg",
+      large_image_url: "https://example.com/images.jpg",
     },
     webp: {
-      image_url: "https://cdn.myanimelist.net/images/anime/1337/99013.webp",
-      small_image_url:
-        "https://cdn.myanimelist.net/images/anime/1337/99013t.webp",
-      large_image_url:
-        "https://cdn.myanimelist.net/images/anime/1337/99013l.webp",
+      image_url: "https://example.com/images.webp",
+      small_image_url: "https://example.com/images.webp",
+      large_image_url: "https://example.com/images.webp",
     },
   },
   trailer: {
-    youtube_id: "D9iTQRB4XRk",
-    url: "https://www.youtube.com/watch?v=D9iTQRB4XRk",
-    embed_url:
-      "https://www.youtube.com/embed/D9iTQRB4XRk?enablejsapi=1&wmode=opaque&autoplay=1",
+    youtube_id: "youtube_id",
+    url: "https://www.youtube.com/watch?v=youtube_id",
+    embed_url: "https://www.youtube.com/embed/youtube_id",
     images: {
-      image_url: "https://img.youtube.com/vi/D9iTQRB4XRk/default.jpg",
-      small_image_url: "https://img.youtube.com/vi/D9iTQRB4XRk/sddefault.jpg",
-      medium_image_url: "https://img.youtube.com/vi/D9iTQRB4XRk/mqdefault.jpg",
-      large_image_url: "https://img.youtube.com/vi/D9iTQRB4XRk/hqdefault.jpg",
-      maximum_image_url:
-        "https://img.youtube.com/vi/D9iTQRB4XRk/maxresdefault.jpg",
+      image_url: "https://img.youtube.com/vi/youtube_id/default.jpg",
+      small_image_url: "https://img.youtube.com/vi/youtube_id/sddefault.jpg",
+      medium_image_url: "https://img.youtube.com/vi/youtube_id/mqdefault.jpg",
+      large_image_url: "https://img.youtube.com/vi/youtube_id/hqdefault.jpg",
+      maximum_image_url: "https://img.youtube.com/vi/youtube_id/maxdefault.jpg",
     },
   },
   approved: true,
   titles: [
     {
       type: "Default",
-      title: "Hunter x Hunter (2011)",
+      title: "Default Title",
     },
     {
       type: "Synonym",
-      title: "HxH (2011)",
+      title: "Synonym Title",
     },
     {
       type: "Japanese",
-      title: "HUNTER×HUNTER（ハンター×ハンター）",
+      title: "ティテル",
     },
     {
       type: "English",
-      title: "Hunter x Hunter",
-    },
-    {
-      type: "German",
-      title: "Hunter x Hunter",
-    },
-    {
-      type: "Spanish",
-      title: "Hunter x Hunter",
-    },
-    {
-      type: "French",
-      title: "Hunter X Hunter",
+      title: "English Title",
     },
   ],
-  title: "Hunter x Hunter (2011)",
-  title_english: "Hunter x Hunter",
-  title_japanese: "HUNTER×HUNTER（ハンター×ハンター）",
-  title_synonyms: ["HxH (2011)"],
+  title: "Title",
+  title_english: "English Title",
+  title_japanese: "ティテル",
+  title_synonyms: ["Synonym Title"],
   type: "TV",
   source: "Manga",
   episodes: 148,
@@ -99,7 +81,7 @@ export const MOCK_ANIME: Anime = {
   members: 2983676,
   favorites: 218595,
   synopsis:
-    "Hunters devote themselves to accomplishing hazardous tasks, all from traversing the world's uncharted territories to locating rare items and monsters. Before becoming a Hunter, one must pass the Hunter Examination—a high-risk selection process in which most applicants end up handicapped or worse, deceased.\n\nAmbitious participants who challenge the notorious exam carry their own reason. What drives 12-year-old Gon Freecss is finding Ging, his father and a Hunter himself. Believing that he will meet his father by becoming a Hunter, Gon takes the first step to walk the same path.\n\nDuring the Hunter Examination, Gon befriends the medical student Leorio Paladiknight, the vindictive Kurapika, and ex-assassin Killua Zoldyck. While their motives vastly differ from each other, they band together for a common goal and begin to venture into a perilous world.\n\n[Written by MAL Rewrite]",
+    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
   background: "",
   season: "fall",
   year: 2011,

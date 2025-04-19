@@ -8,9 +8,14 @@ import { SearchBarSuggestions } from "../SearchBarSuggestions";
 type Props = {
   onSearch: (query: string) => void;
   defaultValue?: string;
+  "data-testid-prefix"?: string;
 };
 
-export const SearchBar = ({ onSearch, defaultValue }: Props) => {
+export const SearchBar = ({
+  onSearch,
+  defaultValue,
+  "data-testid-prefix": dataTestIdPrefix = "",
+}: Props) => {
   const [query, setQuery] = useState(defaultValue ?? "");
   const [debouncedQuery] = useDebounce(query, 600);
   const { data, isLoading } = useGetSearchSuggestions(debouncedQuery);
@@ -27,6 +32,7 @@ export const SearchBar = ({ onSearch, defaultValue }: Props) => {
           setQuery("");
           onSearch("");
         }}
+        data-testid-prefix={dataTestIdPrefix}
       />
       <SearchBarSuggestions
         debouncedQuery={debouncedQuery}
