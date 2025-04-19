@@ -6,6 +6,8 @@ import { useInfiniteAnimes } from "../hooks/useGetInfiniteAnimes";
 import { Loading } from "../components/Loading";
 import { AnimeListPlaceholder } from "../components/AnimeListPlaceholder";
 
+const dataTestIdPrefix = "anime_list_page-";
+
 const AnimeList = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get("q") || "";
@@ -22,16 +24,31 @@ const AnimeList = () => {
       <div className="container mx-auto px-4">
         <div className="mb-4 lg:flex lg:justify-between">
           <h1 className="text-3xl font-bold mb-6">Otabase</h1>
-          <SearchBar onSearch={handleSearch} defaultValue={searchQuery} />
+          <SearchBar
+            onSearch={handleSearch}
+            defaultValue={searchQuery}
+            data-testid-prefix={`${dataTestIdPrefix}search_bar-`}
+          />
         </div>
 
         {isLoading ? (
-          <AnimeListPlaceholder />
+          <AnimeListPlaceholder data-testid-prefix={dataTestIdPrefix} />
         ) : (
           <>
             <div className="grid grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-4 mb-8">
-              {data.map((anime) => {
-                return <AnimeCard key={anime.mal_id} anime={anime} />;
+              {data.map((anime, index) => {
+                return (
+                  <AnimeCard
+                    key={anime.mal_id}
+                    anime={anime}
+                    data-testid={`${dataTestIdPrefix}img_thumbnail-${
+                      index + 1
+                    }`}
+                    overlay-data-testid={`${dataTestIdPrefix}img_overlay-${
+                      index + 1
+                    }`}
+                  />
+                );
               })}
             </div>
 
@@ -40,6 +57,7 @@ const AnimeList = () => {
                 <Button
                   onClick={() => fetchNextPage()}
                   disabled={isFetchingNextPage}
+                  data-testid={`${dataTestIdPrefix}btn_load_more`}
                 >
                   {isFetchingNextPage ? <Loading /> : "Load More"}
                 </Button>

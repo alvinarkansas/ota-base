@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { Combobox } from "@headlessui/react";
+import { Combobox, ComboboxOptions } from "@headlessui/react";
+import { useNavigate } from "react-router-dom";
 import { useDebounce } from "use-debounce";
-import { useGetSearchSuggestions } from "../../hooks/useGetSearchSuggestions";
+import { ArrowRight, Search } from "lucide-react";
 import { SearchBarInput } from "../SearchBarInput";
-import { SearchBarSuggestions } from "../SearchBarSuggestions";
+import { SearchBarSuggestion } from "../SearchBarSuggestion";
+import { useGetSearchSuggestions } from "../../hooks/useGetSearchSuggestions";
 
 type Props = {
   onSearch: (query: string) => void;
@@ -16,6 +18,7 @@ export const SearchBar = ({
   defaultValue,
   "data-testid-prefix": dataTestIdPrefix = "",
 }: Props) => {
+  const navigate = useNavigate();
   const [query, setQuery] = useState(defaultValue ?? "");
   const [debouncedQuery] = useDebounce(query, 600);
   const { data, isLoading } = useGetSearchSuggestions(debouncedQuery);
@@ -34,14 +37,45 @@ export const SearchBar = ({
         }}
         data-testid-prefix={dataTestIdPrefix}
       />
-      <SearchBarSuggestions
-        debouncedQuery={debouncedQuery}
-        isLoading={isLoading}
-        onContinueSearch={() => {
-          onSearch(debouncedQuery);
-        }}
-        suggestions={data}
-      />
+      <ComboboxOptions
+        anchor={{ to: "bottom end", gap: 8 }}
+        transition
+        className="w-[var(--input-width)] rounded-3xl border border-white/5 bg-ntrl-400 p-1 empty:invisible transition duration-100 ease-in data-[leave]:data-[closed]:opacity-0"
+      >
+        {!isLoading ? (
+          <>
+            <SearchBarSuggestion
+              value={null}
+              icon={<Search />}
+              label={`Search for "${debouncedQuery}"`}
+              onClick={() => {
+                onSearch(debouncedQuery);
+              }}
+              label-data-testid={`${dataTestIdPrefix}txt_query_label`}
+              icon-data-testid={`${dataTestIdPrefix}img_query_icon`}
+            />
+            {data.map((suggestion, index) => (
+              <SearchBarSuggestion
+                key={suggestion.mal_id}
+                value={suggestion}
+                label={suggestion.title}
+                icon={<ArrowRight />}
+                onClick={() => {
+                  navigate(`/anime/${suggestion?.mal_id}`);
+                }}
+                label-data-testid={`${dataTestIdPrefix}txt_label-${index + 1}`}
+                icon-data-testid={`${dataTestIdPrefix}img_icon-${index + 1}`}
+              />
+            ))}
+          </>
+        ) : (
+          <SearchBarSuggestion
+            value={null}
+            label="Loading..."
+            label-data-testid={`${dataTestIdPrefix}txt_label`}
+          />
+        )}
+      </ComboboxOptions>
     </Combobox>
   );
 };
