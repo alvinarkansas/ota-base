@@ -25,13 +25,13 @@ export type Anime = {
   title_synonyms: string[];
   type: string;
   source: string;
-  episodes: number;
+  episodes: number | null;
   status: string;
   airing: boolean;
   aired: Aired;
   duration: string;
   rating: string;
-  score: number;
+  score: number | null;
   scored_by: number;
   rank: number;
   popularity: number;

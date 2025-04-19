@@ -1,7 +1,7 @@
 import { lazy, ReactNode, Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import LoadingScreen from "./pages/LoadingScreen";
+import { Loading } from "./components/Loading";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -38,7 +38,17 @@ function App() {
 }
 
 const Suspensed = ({ children }: { children: ReactNode }) => {
-  return <Suspense fallback={<LoadingScreen />}>{children}</Suspense>;
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen grid place-items-center">
+          <Loading />
+        </div>
+      }
+    >
+      {children}
+    </Suspense>
+  );
 };
 
 export default App;

@@ -61,7 +61,9 @@ export const SearchBar = ({
                 label={suggestion.title}
                 icon={<ArrowRight />}
                 onClick={() => {
-                  navigate(`/anime/${suggestion?.mal_id}`);
+                  navigate(`/anime/${suggestion?.mal_id}`, {
+                    state: { detail: suggestion },
+                  });
                 }}
                 label-data-testid={`${dataTestIdPrefix}txt_label-${index + 1}`}
                 icon-data-testid={`${dataTestIdPrefix}img_icon-${index + 1}`}

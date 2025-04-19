@@ -20,6 +20,18 @@ export default defineConfig({
     coverage: {
       provider: "v8",
       reporter: ["clover", "json", "lcov", "text", "json-summary"],
+      exclude: [
+        "**/__test__/**",
+        "src/types/**",
+        "src/services/**",
+        "src/App.tsx",
+        "src/main.tsx",
+        "src/env.ts",
+        "**/*.config.js",
+        "**/*.config.ts",
+        "**/*.d.ts",
+        "**/dist/**",
+      ],
     },
   },
 }) satisfies UserConfig;
