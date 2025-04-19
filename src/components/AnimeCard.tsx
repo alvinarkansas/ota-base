@@ -14,11 +14,11 @@ export const AnimeCard = ({ anime }: Props) => {
       to={`anime/${anime.mal_id}`}
       state={{ detail: anime }}
       key={anime.mal_id}
-      className="flex flex-col lg:transition lg:hover:scale-95"
+      className="lg:transition lg:hover:scale-95"
     >
       <div className="relative rounded-lg h-40 sm:h-[360px] w-full overflow-hidden">
         <div
-          className={`absolute inset-0 bg-ntrl-400 flex items-center justify-center transition-opacity duration-300 ${
+          className={`absolute inset-0 bg-ntrl-400 transition-opacity duration-300 ${
             imageLoaded ? "opacity-0" : "opacity-100 animate-pulse"
           }`}
         />

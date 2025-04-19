@@ -3,7 +3,7 @@ import { ArrowLeft, Star } from "lucide-react";
 import { Anime } from "../types/anime";
 import { useGetAnimeDetail } from "../hooks/useGetAnimeDetail";
 
-export const AnimeDetail = () => {
+const AnimeDetail = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
 
@@ -89,3 +89,5 @@ export const AnimeDetail = () => {
     </div>
   );
 };
+
+export default AnimeDetail;

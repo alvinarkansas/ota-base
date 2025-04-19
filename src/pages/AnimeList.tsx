@@ -1,11 +1,12 @@
-import React from "react";
 import { Button } from "../components/Button";
 import { useSearchParams } from "react-router-dom";
 import { SearchBar } from "../components/SearchBar";
 import { AnimeCard } from "../components/AnimeCard";
 import { useInfiniteAnimes } from "../hooks/useGetInfiniteAnimes";
+import { Loading } from "../components/Loading";
+import { AnimeListPlaceholder } from "../components/AnimeListPlaceholder";
 
-export const AnimeList: React.FC = () => {
+const AnimeList = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get("q") || "";
 
@@ -25,9 +26,7 @@ export const AnimeList: React.FC = () => {
         </div>
 
         {isLoading ? (
-          <div className="flex justify-center items-center min-h-[400px]">
-            <p>Loading...</p>
-          </div>
+          <AnimeListPlaceholder />
         ) : (
           <>
             <div className="grid grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-4 mb-8">
@@ -42,7 +41,7 @@ export const AnimeList: React.FC = () => {
                   onClick={() => fetchNextPage()}
                   disabled={isFetchingNextPage}
                 >
-                  {isFetchingNextPage ? "Loading..." : "Load More"}
+                  {isFetchingNextPage ? <Loading /> : "Load More"}
                 </Button>
               </div>
             )}
@@ -58,3 +57,5 @@ export const AnimeList: React.FC = () => {
     </div>
   );
 };
+
+export default AnimeList;

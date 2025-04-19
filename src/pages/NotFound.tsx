@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "../components/Button";
 
-export const NotFound = () => {
+const NotFound = () => {
   return (
     <div className="flex flex-col justify-center items-center gap-6 min-h-screen">
       <div>
@@ -16,3 +16,5 @@ export const NotFound = () => {
     </div>
   );
 };
+
+export default NotFound;
