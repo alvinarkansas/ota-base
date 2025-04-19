@@ -1,31 +1,20 @@
 import React from "react";
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { searchAnime } from "../services/api";
 import { Button } from "../components/Button";
-import { Link, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { SearchBar } from "../components/SearchBar";
 import { AnimeCard } from "../components/AnimeCard";
+import { useInfiniteAnimes } from "../hooks/useGetInfiniteAnimes";
 
 export const AnimeList: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get("q") || "";
 
   const { data, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage } =
-    useInfiniteQuery({
-      queryKey: ["animes", searchQuery],
-      queryFn: searchAnime,
-      getNextPageParam: (lastPage) =>
-        lastPage.pagination.has_next_page
-          ? lastPage.pagination.current_page + 1
-          : undefined,
-      initialPageParam: 1,
-    });
+    useInfiniteAnimes(searchQuery);
 
   const handleSearch = (newSearch: string) => {
     setSearchParams(newSearch ? { q: newSearch } : {});
   };
-
-  const animeList = data?.pages.flatMap((page) => page.data) ?? [];
 
   return (
     <div className="min-h-screen py-8">
@@ -42,7 +31,7 @@ export const AnimeList: React.FC = () => {
         ) : (
           <>
             <div className="grid grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-4 mb-8">
-              {animeList.map((anime) => {
+              {data.map((anime) => {
                 return <AnimeCard key={anime.mal_id} anime={anime} />;
               })}
             </div>
@@ -58,8 +47,8 @@ export const AnimeList: React.FC = () => {
               </div>
             )}
 
-            {!hasNextPage && animeList.length > 0 && (
-              <div className="text-center text-gray-600">
+            {!hasNextPage && data.length > 0 && (
+              <div className="text-center text-ntrl-400">
                 No more results to load
               </div>
             )}

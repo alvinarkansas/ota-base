@@ -1,17 +1,15 @@
-import { useQuery } from "@tanstack/react-query";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { ArrowLeft, Star } from "lucide-react";
-import { getAnimeById } from "../services/api";
-import { Anime, AnimeResponse } from "../types/anime";
+import { Anime } from "../types/anime";
+import { useGetAnimeDetail } from "../hooks/useGetAnimeDetail";
 
 export const AnimeDetail = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
 
   const { id } = useParams<{ id: string }>();
-  const { data: animeResponse, isLoading } = useQuery<AnimeResponse>({
-    queryKey: ["anime", id],
-    queryFn: () => getAnimeById(Number(id)),
+  const { data: animeResponse, isLoading } = useGetAnimeDetail({
+    id,
     enabled: !state,
   });
 

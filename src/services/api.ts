@@ -1,8 +1,9 @@
 import axios from "axios";
 import { AnimeResponse } from "../types/anime";
+import { JIKAN_MOE_URL } from "../env";
 
 const api = axios.create({
-  baseURL: "https://api.jikan.moe/v4",
+  baseURL: JIKAN_MOE_URL,
   headers: {
     "Content-Type": "application/json",
   },
@@ -10,20 +11,21 @@ const api = axios.create({
 
 type SearchAnimeParams = {
   pageParam: number;
+  limit?: number;
   queryKey: string[];
 };
 
 export const searchAnime = async ({
   pageParam = 1,
+  limit = 15,
   queryKey,
 }: SearchAnimeParams): Promise<AnimeResponse> => {
   const [_, query] = queryKey;
-  console.log();
   const response = await api.get("/anime", {
     params: {
       q: query,
       page: pageParam,
-      limit: 15,
+      limit,
       sfw: true,
     },
   });

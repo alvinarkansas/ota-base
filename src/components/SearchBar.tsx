@@ -1,6 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import { getRecommendation } from "../services/api";
 import {
   Combobox,
   ComboboxInput,
@@ -10,6 +8,7 @@ import {
 import { ArrowRight, Search, X } from "lucide-react";
 import { useDebounce } from "use-debounce";
 import { useNavigate } from "react-router-dom";
+import { useGetSearchSuggestions } from "../hooks/useGetSearchSuggestions";
 
 type Props = {
   onSearch: (query: string) => void;
@@ -21,15 +20,10 @@ export const SearchBar = ({ onSearch, defaultValue }: Props) => {
 
   const [query, setQuery] = useState(defaultValue ?? "");
   const [debouncedQuery] = useDebounce(query, 600);
-  const { data, isLoading } = useQuery({
-    queryKey: ["recommendation", debouncedQuery],
-    queryFn: () => getRecommendation(debouncedQuery),
-    enabled: !!debouncedQuery,
-  });
-  const recommendations = data?.data ?? [];
+  const { data, isLoading } = useGetSearchSuggestions(debouncedQuery);
 
   return (
-    <Combobox immediate={recommendations.length > 1} value={query}>
+    <Combobox immediate={data.length > 1} value={query}>
       <div className="relative">
         <ComboboxInput
           className="w-full lg:w-96 pl-6 py-4 rounded-full bg-ntrl-400 placeholder:text-ntrl-300 pr-16 focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25"
@@ -74,7 +68,7 @@ export const SearchBar = ({ onSearch, defaultValue }: Props) => {
               </span>
               <Search />
             </ComboboxOption>
-            {recommendations.map((recommendation) => (
+            {data.map((recommendation) => (
               <ComboboxOption
                 key={recommendation.mal_id}
                 value={recommendation}
