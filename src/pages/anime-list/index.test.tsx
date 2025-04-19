@@ -83,4 +83,20 @@ describe(AnimeList.name, () => {
 
     expect(screen.getByText("No more results to load")).toBeVisible();
   });
+
+  it("displays empty state if nothing is on the list", () => {
+    vi.spyOn(hooks, "useInfiniteAnimes").mockImplementation(() => {
+      return {
+        data: [],
+        isLoading: false,
+        isFetchingNextPage: false,
+        hasNextPage: false,
+        fetchNextPage: vi.fn(),
+      };
+    });
+
+    customRender(<AnimeList />);
+
+    expect(screen.getByText("Sumimasen, we found nothing")).toBeVisible();
+  });
 });
