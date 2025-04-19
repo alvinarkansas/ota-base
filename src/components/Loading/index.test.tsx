@@ -1,6 +1,6 @@
-import { render, screen } from "../utils/testUtil";
+import { render, screen } from "../../utils/testUtil";
 import { describe, it, expect } from "vitest";
-import { Loading } from "./Loading";
+import { Loading } from "./index";
 
 describe(Loading.name, () => {
   it("renders the loading spinner and text", () => {

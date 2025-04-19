@@ -46,7 +46,6 @@ export type Anime = {
   licensors: BaseDetailObject[];
   studios: BaseDetailObject[];
   genres: BaseDetailObject[];
-  // explicit_genres: any[];
   themes: BaseDetailObject[];
   demographics: BaseDetailObject[];
 };

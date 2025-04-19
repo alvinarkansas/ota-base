@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Anime } from "../types/anime";
+import { Anime } from "../../types/anime";
 import { useState } from "react";
 
 type Props = {
