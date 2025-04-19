@@ -27,6 +27,8 @@ export const searchAnime = async ({
       page: pageParam,
       limit,
       sfw: true,
+      order_by: "score",
+      sort: "desc",
     },
   });
   return response.data;
