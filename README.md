@@ -1,4 +1,6 @@
-# Otabase - Instruction
+# Otabase
+
+![Cover](./public/readme-cover.png)
 
 A regular web application for exploring anime using the Jikan API. Built with React, TypeScript, and Vite.
 
